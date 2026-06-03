@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Premium Dark Mode Stylesheet (Electronics / Tech Showcase Theme)
+   ========================================================================== */
+
+/* Enable smooth transitions for theme switching */
+html, body, [class*="color-"], a, button, input, select, textarea, .product-card, .collection-card, .featured-blog-posts-card {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Premium Dark Mode Variables override */
+html.theme-dark,
+html.theme-dark body,
+html.theme-dark [class*="color-"] {
+  /* Color Palette - Electronics Cyberpunk Vibe */
+  --color-background: #090a0f;
+  --color-background-rgb: 9 10 15;
+  --color-foreground: #cbd5e1;
+  --color-foreground-rgb: 203 213 225;
+  --color-foreground-heading: #ffffff;
+  --color-foreground-heading-rgb: 255 255 255;
+  
+  /* Glowing Neon Accents */
+  --color-primary: #00d2ff;
+  --color-primary-rgb: 0 210 255;
+  --color-primary-hover: #af40ff;
+  --color-primary-hover-rgb: 175 64 255;
+  
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-rgb: 255 255 255;
+  --color-shadow: #000000;
+  --color-shadow-rgb: 0 0 0;
+  
+  /* Primary Buttons - Neon Glowing borders and text */
+  --color-primary-button-background: #ffffff;
+  --color-primary-button-text: #090a0f;
+  --color-primary-button-border: #ffffff;
+  --color-primary-button-hover-background: #00d2ff;
+  --color-primary-button-hover-text: #090a0f;
+  --color-primary-button-hover-border: #00d2ff;
+  
+  /* Secondary Buttons */
+  --color-secondary-button-background: rgba(0, 0, 0, 0);
+  --color-secondary-button-text: #ffffff;
+  --color-secondary-button-border: rgba(255, 255, 255, 0.4);
+  --color-secondary-button-hover-background: rgba(255, 255, 255, 0.05);
+  --color-secondary-button-hover-text: #00d2ff;
+  --color-secondary-button-hover-border: #00d2ff;
+  
+  /* Inputs */
+  --color-input-background: #141622;
+  --color-input-text: #ffffff;
+  --color-input-text-rgb: 255 255 255;
+  --color-input-border: rgba(255, 255, 255, 0.15);
+  --color-input-hover-background: #1e2133;
+  
+  /* Variants (swatches, sizes, etc.) */
+  --color-variant-background: #141622;
+  --color-variant-text: #cbd5e1;
+  --color-variant-border: rgba(255, 255, 255, 0.12);
+  --color-variant-hover-background: #1e2133;
+  --color-variant-hover-text: #ffffff;
+  --color-variant-hover-border: #00d2ff;
+  
+  /* Selected Variant */
+  --color-selected-variant-background: #00d2ff;
+  --color-selected-variant-text: #090a0f;
+  --color-selected-variant-border: #00d2ff;
+  
+  /* Badges */
+  --color-badge-background: #1e293b;
+  --color-badge-text: #f8fafc;
+  --color-badge-border: #334155;
+}
+
+/* Glassmorphism Header overrides */
+html.theme-dark #header-component {
+  --color-scheme-top-row: rgba(9, 10, 15, 0.8) !important;
+  --color-scheme-bottom-row: rgba(9, 10, 15, 0.8) !important;
+  --color-submenu: #141622 !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Override drawer background */
+html.theme-dark .cart-drawer__dialog,
+html.theme-dark .cart-drawer__content,
+html.theme-dark .cart-drawer__header,
+html.theme-dark .cart-drawer__summary,
+html.theme-dark dialog {
+  background-color: #0c0e15 !important;
+}
+
+/* Card overrides for premium hover effects */
+html.theme-dark .product-card,
+html.theme-dark .collection-card,
+html.theme-dark .featured-blog-posts-card {
+  background-color: #12131a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--card-corner-radius, 8px);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+html.theme-dark .product-card:hover,
+html.theme-dark .collection-card:hover {
+  border-color: #00d2ff;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2), 0 4px 25px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px) !important;
+}
+
+/* Add a beautiful violet gradient hover border for blog/collections */
+html.theme-dark .featured-blog-posts-card:hover {
+  border-color: #af40ff;
+  box-shadow: 0 0 15px rgba(175, 64, 255, 0.2), 0 4px 25px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px) !important;
+}
+
+/* Glowing text highlight on links and active states */
+html.theme-dark a:hover {
+  color: #00d2ff;
+}
+
+/* Make primary buttons glow on hover */
+html.theme-dark .button:not(.button-secondary):hover,
+html.theme-dark .primary-button:hover {
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+  transform: scale(1.02);
+}
+
+/* Make search inputs glow */
+html.theme-dark input:focus,
+html.theme-dark textarea:focus,
+html.theme-dark select:focus {
+  outline: none;
+  border-color: #00d2ff !important;
+  box-shadow: 0 0 8px rgba(0, 210, 255, 0.3) !important;
+}
+
+/* Customize scrollbars for dark mode */
+html.theme-dark::-webkit-scrollbar {
+  width: 10px;
+}
+html.theme-dark::-webkit-scrollbar-track {
+  background: #090a0f;
+}
+html.theme-dark::-webkit-scrollbar-thumb {
+  background: #1e2130;
+  border-radius: 5px;
+  border: 2px solid #090a0f;
+}
+html.theme-dark::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;
+}
+
+/* Hero section overlay adjustments to ensure high contrast in dark mode */
+html.theme-dark .hero .overlay {
+  background-color: rgba(9, 10, 15, 0.5) !important;
+}
+
+/* Glowing lines/dividers matching the video neon theme */
+html.theme-dark hr,
+html.theme-dark .divider {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  position: relative;
+}
+
+/* Add a neon gradient stripe to headers or major dividers */
+html.theme-dark .header__row::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00d2ff, #af40ff, transparent);
+  opacity: 0.5;
+}

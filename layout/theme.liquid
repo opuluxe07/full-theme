@@ -6,6 +6,19 @@
   lang="{{ request.locale.iso_code }}"
 >
   <head>
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.classList.add('theme-dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.classList.remove('theme-dark');
+        }
+      })();
+    </script>
+
     {%- if settings.favicon != blank -%}
       <link
         rel="icon"

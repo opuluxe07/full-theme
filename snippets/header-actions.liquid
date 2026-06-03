@@ -113,6 +113,33 @@
     </div>
   {% endif %}
 
+  <theme-toggle class="header-actions__action">
+    <button
+      class="button-unstyled theme-toggle-btn"
+      aria-label="Toggle theme"
+      type="button"
+    >
+      <span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2"></path>
+          <path d="M12 20v2"></path>
+          <path d="M4.93 4.93l1.41 1.41"></path>
+          <path d="M17.66 17.66l1.41 1.41"></path>
+          <path d="M2 12h2"></path>
+          <path d="M20 12h2"></path>
+          <path d="M6.34 17.66l-1.41 1.41"></path>
+          <path d="M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+      </span>
+      <span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="var(--icon-stroke-width)" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </span>
+    </button>
+  </theme-toggle>
+
   {% if settings.cart_type == 'drawer' and template.name != 'cart' %}
     <script
       src="{{ 'cart-drawer.js' | asset_url }}"
@@ -262,6 +289,12 @@
 <script
   type="module"
   src="{{ 'header-actions.js' | asset_url }}"
+  fetchpriority="low"
+></script>
+
+<script
+  type="module"
+  src="{{ 'theme-toggle.js' | asset_url }}"
   fetchpriority="low"
 ></script>
 
@@ -709,5 +742,62 @@
     .header__column--right .header-actions--text {
       margin-inline-start: 0;
     }
+  }
+
+  /* Theme Toggle Button Styling */
+  theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    color: var(--color-foreground);
+    background: transparent;
+    transition: background-color var(--animation-speed) var(--animation-easing), transform var(--animation-speed) var(--animation-easing);
+    border: none;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-toggle-btn:hover {
+    background-color: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    transform: scale(1.05);
+  }
+
+  .theme-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s var(--animation-easing);
+  }
+
+  /* Light theme: show Moon, hide Sun */
+  html:not(.theme-dark) .theme-toggle-icon--sun {
+    opacity: 0;
+    transform: translateY(20px) rotate(45deg);
+  }
+  html:not(.theme-dark) .theme-toggle-icon--moon {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+
+  /* Dark theme: show Sun, hide Moon */
+  html.theme-dark .theme-toggle-icon--sun {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  html.theme-dark .theme-toggle-icon--moon {
+    opacity: 0;
+    transform: translateY(-20px) rotate(-45deg);
   }
 {% endstylesheet %}
