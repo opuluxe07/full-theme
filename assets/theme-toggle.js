@@ -4,7 +4,7 @@ class ThemeToggle extends HTMLElement {
     if (!button) return;
 
     button.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
       // Update theme attribute and classes on root
