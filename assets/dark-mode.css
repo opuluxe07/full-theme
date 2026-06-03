@@ -72,6 +72,14 @@ html.theme-dark [class*="color-"] {
   --color-badge-border: #334155;
 }
 
+html.theme-dark body {
+  background-image: radial-gradient(circle at top, rgba(9, 10, 15, 0.7) 0%, #090a0f 100%), url('cyberpunk-bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 /* Glassmorphism Header overrides */
 html.theme-dark #header-component {
   --color-scheme-top-row: rgba(9, 10, 15, 0.8) !important;
@@ -94,25 +102,39 @@ html.theme-dark dialog {
 html.theme-dark .product-card,
 html.theme-dark .collection-card,
 html.theme-dark .featured-blog-posts-card {
-  background-color: #12131a;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: var(--card-corner-radius, 8px);
+  background-color: rgba(18, 19, 26, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--card-corner-radius, 12px);
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
-html.theme-dark .product-card:hover,
-html.theme-dark .collection-card:hover {
+html.theme-dark .product-card:hover {
   border-color: #00d2ff;
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2), 0 4px 25px rgba(0, 0, 0, 0.5);
-  transform: translateY(-4px) !important;
+  box-shadow: 0 0 18px rgba(0, 210, 255, 0.25), 0 6px 30px rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px) !important;
+}
+
+html.theme-dark .collection-card:hover {
+  border-color: #c5a059;
+  box-shadow: 0 0 20px rgba(197, 160, 89, 0.3), 0 6px 30px rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px) !important;
 }
 
 /* Add a beautiful violet gradient hover border for blog/collections */
 html.theme-dark .featured-blog-posts-card:hover {
   border-color: #af40ff;
-  box-shadow: 0 0 15px rgba(175, 64, 255, 0.2), 0 4px 25px rgba(0, 0, 0, 0.5);
-  transform: translateY(-4px) !important;
+  box-shadow: 0 0 18px rgba(175, 64, 255, 0.25), 0 6px 30px rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px) !important;
+}
+
+/* Elegant style for collection card title text overlay */
+html.theme-dark .collection-card .text-block p {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /* Glowing text highlight on links and active states */

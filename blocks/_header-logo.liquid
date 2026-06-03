@@ -55,14 +55,20 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {%- if settings.logo != blank -%}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        style: logo_style
+      %}
+    {%- else -%}
+      <span class="elegant-luxury-logo">
+        <span class="elegant-luxury-logo__main">{{ shop.name }}</span>
+        <span class="elegant-luxury-logo__sub">HAUTE COUTURE</span>
+      </span>
+    {%- endif -%}
   </span>
 
   {% if use_inverse_logo %}
@@ -137,6 +143,37 @@
 
   .header-logo__image-container--inverse {
     display: var(--header-logo-inverse-display, none);
+  }
+
+  .elegant-luxury-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .elegant-luxury-logo__main {
+    font-size: 1.35rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #c5a059 0%, #f3e7c4 50%, #c5a059 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 12px rgba(197, 160, 89, 0.12);
+    display: inline-block;
+  }
+  .elegant-luxury-logo__sub {
+    font-size: 0.5rem;
+    font-weight: 600;
+    color: rgba(var(--color-foreground-rgb), 0.65);
+    letter-spacing: 0.35em;
+    margin-top: 4px;
+    border-top: 1px solid rgba(var(--color-foreground-rgb), 0.15);
+    padding-top: 3px;
+    width: 100%;
   }
 {% endstylesheet %}
 

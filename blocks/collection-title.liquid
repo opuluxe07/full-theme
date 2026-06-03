@@ -1,7 +1,7 @@
 
 
 {% if closest.collection == blank %}
-  {% assign text = 'placeholders.collection_title' | t %}
+  {% capture text %}{% cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE' %}{% endcapture %}
   {% assign collection_title = '<p>' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: collection_title, block: block %}
 {% elsif closest.collection != blank %}
