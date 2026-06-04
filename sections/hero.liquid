@@ -166,17 +166,16 @@
 
   {%- if media_1 == 'video' -%}
     <div class="{{ media_wrapper_desktop_class }}">
-      {{
-        section.settings.video_1
-        | video_tag:
-          poster: nil,
-          autoplay: true,
-          loop: true,
-          controls: false,
-          muted: true,
-          class: 'hero__media',
-          data-testid: 'hero-desktop-video-1'
-      }}
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="hero__media"
+        data-testid="hero-desktop-video-1"
+      >
+        <source src="{{ 'Product_showcase_video_electronics_202606031955.mp4' | asset_url }}" type="video/mp4">
+      </video>
     </div>
   {%- endif -%}
 
@@ -202,17 +201,16 @@
 
     {%- if media_1_mobile == 'video' -%}
       <div class="{{ media_wrapper_mobile_class }}">
-        {{
-          section.settings.video_1_mobile
-          | video_tag:
-            poster: nil,
-            autoplay: true,
-            loop: true,
-            controls: false,
-            muted: true,
-            class: 'hero__media',
-            data-testid: 'hero-mobile-video-1'
-        }}
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="hero__media"
+          data-testid="hero-mobile-video-1"
+        >
+          <source src="{{ 'Product_showcase_video_electronics_202606031955.mp4' | asset_url }}" type="video/mp4">
+        </video>
       </div>
     {%- endif -%}
   {%- endif -%}
