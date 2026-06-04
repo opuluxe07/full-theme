@@ -472,7 +472,6 @@
 
     z-index: var(--layer-overlay);
 
-    &[transparent='not-sticky']:is([data-sticky-state='active'], [data-sticky-state='idle']),
     &:has(.menu-list__link:not([aria-haspopup]):hover) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
@@ -486,7 +485,7 @@
     }
 
     /** For transparent header, apply inherit to rows when menu is not hovered */
-    &:not(:is([data-sticky-state='active'], [data-sticky-state='idle'])):not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
+    &:not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
       --color-foreground: inherit;
       --color-foreground-rgb: inherit;
       --color-border: inherit;
@@ -577,31 +576,7 @@
   }
 
   .header[data-sticky-state='idle'] {
-    opacity: 1;
-  }
-
-  .header :is(.header-menu, header-menu) {
-    transition: opacity var(--animation-speed) var(--animation-easing), visibility var(--animation-speed) var(--animation-easing);
-  }
-
-  .header[data-sticky-state='idle']:not(:hover) :is(.header-menu, header-menu) {
     opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  .header__row--bottom {
-    transition: max-height var(--animation-speed) var(--animation-easing), padding var(--animation-speed) var(--animation-easing), border-color var(--animation-speed) var(--animation-easing), border-width var(--animation-speed) var(--animation-easing);
-    max-height: 200px;
-  }
-
-  .header[data-sticky-state='idle']:not(:hover) .header__row--bottom {
-    max-height: 0;
-    overflow: hidden;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    border-bottom-width: 0 !important;
-    pointer-events: none;
   }
 
 
