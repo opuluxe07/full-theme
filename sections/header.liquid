@@ -472,7 +472,7 @@
 
     z-index: var(--layer-overlay);
 
-    &[transparent='not-sticky'][data-sticky-state='active'],
+    &[transparent='not-sticky']:is([data-sticky-state='active'], [data-sticky-state='idle']),
     &:has(.menu-list__link:not([aria-haspopup]):hover) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
@@ -486,7 +486,7 @@
     }
 
     /** For transparent header, apply inherit to rows when menu is not hovered */
-    &:not([data-sticky-state='active']):not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
+    &:not(:is([data-sticky-state='active'], [data-sticky-state='idle'])):not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
       --color-foreground: inherit;
       --color-foreground-rgb: inherit;
       --color-border: inherit;
@@ -553,7 +553,7 @@
   }
 
   .header-section:has(> #header-component[sticky='always']),
-  .header-section:has(> #header-component[sticky='scroll-up'][data-sticky-state='active']) {
+  .header-section:has(> #header-component[sticky='scroll-up']:is([data-sticky-state='active'], [data-sticky-state='idle'])) {
     position: sticky;
 
     /* Use -1 instead of 0 so intersection observer can track sticky state */
