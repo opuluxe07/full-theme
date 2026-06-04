@@ -1,13 +1,43 @@
 
 
-{% if closest.collection == blank %}
-  {% capture text %}{% cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE' %}{% endcapture %}
-  {% assign collection_title = '<p>' | append: text | append: '</p>' %}
-  {% render 'text', fallback_text: collection_title, block: block %}
-{% elsif closest.collection != blank %}
-  {% assign collection_title = '<p>' | append: closest.collection.title | append: '</p>' %}
-  {% render 'text', fallback_text: collection_title, block: block %}
-{% endif %}
+{% liquid
+  assign title_text = ''
+  if closest.collection == blank
+    capture placeholder_text
+      cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
+    endcapture
+    case placeholder_text
+      when 'CHRONO LUXURY'
+        assign title_text = 'gadgets & techs'
+      when 'TECHWEAR APPAREL'
+        assign title_text = 'fitness & outdoor gear'
+      when 'NEON ACCESSORIES'
+        assign title_text = 'men accessories'
+      when 'FUTURE COUTURE'
+        assign title_text = 'women accessories'
+      else
+        assign title_text = placeholder_text
+    endcase
+  else
+    assign handle = closest.collection.handle
+    case handle
+      when 'chrono-luxury'
+        assign title_text = 'gadgets & techs'
+      when 'techwear-apparel'
+        assign title_text = 'fitness & outdoor gear'
+      when 'neon-accessories'
+        assign title_text = 'men accessories'
+      when 'future-couture'
+        assign title_text = 'women accessories'
+      else
+        assign title_text = closest.collection.title
+    endcase
+  endif
+
+  assign collection_title = '<p>' | append: title_text | append: '</p>'
+%}
+
+{% render 'text', fallback_text: collection_title, block: block %}
 
 {% schema %}
 {

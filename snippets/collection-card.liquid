@@ -63,7 +63,41 @@
       href="{{ collection.url }}"
     {% endunless %}
   >
-    <span class="visually-hidden">{{ collection.title }}</span>
+    {% liquid
+      assign display_title = ''
+      if onboarding
+        capture placeholder_text
+          cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
+        endcapture
+        case placeholder_text
+          when 'CHRONO LUXURY'
+            assign display_title = 'gadgets & techs'
+          when 'TECHWEAR APPAREL'
+            assign display_title = 'fitness & outdoor gear'
+          when 'NEON ACCESSORIES'
+            assign display_title = 'men accessories'
+          when 'FUTURE COUTURE'
+            assign display_title = 'women accessories'
+          else
+            assign display_title = placeholder_text
+        endcase
+      else
+        assign handle = collection.handle
+        case handle
+          when 'chrono-luxury'
+            assign display_title = 'gadgets & techs'
+          when 'techwear-apparel'
+            assign display_title = 'fitness & outdoor gear'
+          when 'neon-accessories'
+            assign display_title = 'men accessories'
+          when 'future-couture'
+            assign display_title = 'women accessories'
+          else
+            assign display_title = collection.title
+        endcase
+      endif
+    %}
+    <span class="visually-hidden">{{ display_title }}</span>
   </a>
   <div class="collection-card__inner">
     {{ card_image }}
