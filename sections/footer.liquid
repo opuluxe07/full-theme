@@ -44,6 +44,53 @@
   >
     {% content_for 'blocks' %}
   </div>
+
+  <div class="footer-trust-grid">
+    <div class="footer-trust-item">
+      <div class="footer-trust-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 8h5v1.5H1zm-1 3h4v1.5H0zm2 3h3v1.5H2z" />
+          <path d="M18.5 7.5h-10c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1h1.08c-.05-.16-.08-.34-.08-.5 0-1.1.9-2 2-2s2 .9 2 2c0 .16-.03.34-.08.5h4.16c-.05-.16-.08-.34-.08-.5 0-1.1.9-2 2-2s2 .9 2 2c0 .16-.03.34-.08.5h1.08c.55 0 1-.45 1-1v-5l-3-4.5zM22.5 12h-4V9h3.5l.5 1v2z"/>
+          <circle cx="11.5" cy="18" r="1.5"/>
+          <circle cx="17.5" cy="18" r="1.5"/>
+        </svg>
+      </div>
+      <h4 class="footer-trust-title">GLOBAL SHIPPING</h4>
+      <p class="footer-trust-desc">Complimentary worldwide delivery on all premium orders.</p>
+    </div>
+    <div class="footer-trust-item">
+      <div class="footer-trust-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 9l10 13 10-13L12 2zm0 3.3L18.1 9h-12.2L12 5.3zM4.9 10.5h14.2L12 19.8 4.9 10.5z"/>
+        </svg>
+      </div>
+      <h4 class="footer-trust-title">AUTHENTICITY GUARANTEE</h4>
+      <p class="footer-trust-desc">Every piece is certified and meticulously inspected.</p>
+    </div>
+    <div class="footer-trust-item">
+      <div class="footer-trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <polyline points="3 3 3 8 8 8"/>
+        </svg>
+      </div>
+      <h4 class="footer-trust-title">SEAMLESS RETURNS</h4>
+      <p class="footer-trust-desc">30-day effortless return policy for your peace of mind.</p>
+    </div>
+    <div class="footer-trust-item">
+      <div class="footer-trust-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 14c0-4.97 4.03-9 9-9s9 4.03 9 9" />
+          <rect x="2" y="14" width="3" height="5" rx="1" />
+          <rect x="19" y="14" width="3" height="5" rx="1" />
+          <path d="M19 19c0 1.5-1.5 2.5-3.5 2.5h-1" />
+          <circle cx="14" cy="21.5" r="1" fill="currentColor" />
+        </svg>
+      </div>
+      <h4 class="footer-trust-title">CONCIERGE SERVICE</h4>
+      <p class="footer-trust-desc">24/7 dedicated support for our esteemed clientele.</p>
+    </div>
+  </div>
 </div>
 
 {% stylesheet %}
@@ -188,6 +235,79 @@
 
   .footer-content .email-signup__button:hover {
     background-color: #b89047 !important;
+  }
+
+  /* Trust Badges Grid */
+  .footer-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    justify-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .footer-trust-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 280px;
+    box-sizing: border-box;
+  }
+
+  .footer-trust-icon {
+    color: #c5a880; /* Gold color */
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-trust-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .footer-trust-title {
+    font-family: 'Cinzel', serif !important;
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    margin: 0 0 10px 0 !important;
+    line-height: 1.4 !important;
+  }
+
+  .footer-trust-desc {
+    font-family: var(--font-body--family) !important;
+    color: #cbd5e1 !important;
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+  }
+
+  @media screen and (max-width: 989px) {
+    .footer-trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 20px;
+      margin-top: 40px;
+    }
+  }
+
+  @media screen and (max-width: 599px) {
+    .footer-trust-grid {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
   }
 {% endstylesheet %}
 
