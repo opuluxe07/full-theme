@@ -102,6 +102,16 @@
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {%- assign title_downcase = link.title | downcase -%}
+              {%- if title_downcase == 'contact' -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              {%- assign link_title = link.title -%}
+              {%- if title_downcase == 'catalog' -%}
+                {%- assign link_title = 'Collections' -%}
+              {%- endif -%}
+
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 style="--menu-drawer-animation-index: {{ animation_index }};"
@@ -126,7 +136,7 @@
                         id="HeaderDrawer-{{ link.handle }}"
                         class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                       >
-                        <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                        <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                         <span class="svg-wrapper icon-plus">
                           {{- 'icon-plus.svg' | inline_asset_content -}}
                         </span>
@@ -190,7 +200,7 @@
                       aria-current="page"
                     {% endif %}
                   >
-                    <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                    <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                   </a>
                   {% liquid
                     assign render_link_image = false
@@ -244,10 +254,39 @@
                       aria-current="page"
                     {% endif %}
                   >
-                    <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                    <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                   </a>
                 {% endif %}
               </li>
+
+              {%- if title_downcase == 'catalog' -%}
+                {% assign animation_index = animation_index | plus: 1 %}
+                <li
+                  style="--menu-drawer-animation-index: {{ animation_index }};"
+                  class="{%- if block_settings.drawer_accordion -%}menu-drawer__list-item--deep{%- else -%}menu-drawer__list-item--flat{%- endif -%}{% if block_settings.drawer_dividers %} menu-drawer__list-item--divider{% endif %}"
+                >
+                  <a
+                    id="HeaderDrawer-best-seller"
+                    href="/collections/all?sort_by=best-selling"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                  >
+                    <span class="menu-drawer__menu-item-text wrap-text">Best Seller</span>
+                  </a>
+                </li>
+                {% assign animation_index = animation_index | plus: 1 %}
+                <li
+                  style="--menu-drawer-animation-index: {{ animation_index }};"
+                  class="{%- if block_settings.drawer_accordion -%}menu-drawer__list-item--deep{%- else -%}menu-drawer__list-item--flat{%- endif -%}{% if block_settings.drawer_dividers %} menu-drawer__list-item--divider{% endif %}"
+                >
+                  <a
+                    id="HeaderDrawer-about"
+                    href="/pages/about"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                  >
+                    <span class="menu-drawer__menu-item-text wrap-text">About</span>
+                  </a>
+                </li>
+              {%- endif -%}
             {%- endfor -%}
           {% else %}
             {%- comment -%}
@@ -255,6 +294,16 @@
             {%- endcomment -%}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {%- assign title_downcase = link.title | downcase -%}
+              {%- if title_downcase == 'contact' -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              {%- assign link_title = link.title -%}
+              {%- if title_downcase == 'catalog' -%}
+                {%- assign link_title = 'Collections' -%}
+              {%- endif -%}
+
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 class="menu-drawer__list-item"
@@ -273,7 +322,7 @@
                       class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
                       on:click="header-drawer/open/submenu"
                     >
-                      <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                      <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                       <span class="svg-wrapper icon-caret icon-caret--forward">
                         {{- 'icon-caret.svg' | inline_asset_content -}}
                       </span>
@@ -289,12 +338,12 @@
                           <button
                             class="button menu-drawer__back-button focus-inset"
                             on:click="header-drawer/back"
-                            aria-label="{{ 'actions.back_to' | t: title: link.title }}"
+                            aria-label="{{ 'actions.back_to' | t: title: link_title }}"
                           >
                             <span class="svg-wrapper icon-caret icon-caret--backward">
                               {{- 'icon-caret.svg' | inline_asset_content -}}
                             </span>
-                            <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                            <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                           </button>
                           <button
                             class="button button-unstyled close-button menu-drawer__close-button"
@@ -564,10 +613,39 @@
                       aria-current="page"
                     {% endif %}
                   >
-                    <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                    <span class="menu-drawer__menu-item-text wrap-text">{{ link_title | escape }}</span>
                   </a>
                 {%- endif -%}
               </li>
+
+              {%- if title_downcase == 'catalog' -%}
+                {% assign animation_index = animation_index | plus: 1 %}
+                <li
+                  class="menu-drawer__list-item"
+                  style="--menu-drawer-animation-index: {{ animation_index }};"
+                >
+                  <a
+                    id="HeaderDrawer-best-seller"
+                    href="/collections/all?sort_by=best-selling"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                  >
+                    <span class="menu-drawer__menu-item-text wrap-text">Best Seller</span>
+                  </a>
+                </li>
+                {% assign animation_index = animation_index | plus: 1 %}
+                <li
+                  class="menu-drawer__list-item"
+                  style="--menu-drawer-animation-index: {{ animation_index }};"
+                >
+                  <a
+                    id="HeaderDrawer-about"
+                    href="/pages/about"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                  >
+                    <span class="menu-drawer__menu-item-text wrap-text">About</span>
+                  </a>
+                </li>
+              {%- endif -%}
             {%- endfor -%}
           {% endif %}
         </ul>
@@ -1113,6 +1191,8 @@
     text-decoration: none;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Cinzel', serif !important;
+    color: #f2f7f7 !important;
   }
 
   .menu-drawer__menu-item:has(> .menu-drawer__link-image) {

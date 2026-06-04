@@ -39,6 +39,16 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {%- assign title_downcase = link.title | downcase -%}
+              {%- if title_downcase == 'contact' -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              {%- assign display_title = link.title -%}
+              {%- if title_downcase == 'catalog' -%}
+                {%- assign display_title = 'Collections' -%}
+              {%- endif -%}
+
               <li>
                 <a
                   href="{{ link.url }}"
@@ -48,9 +58,30 @@
                     aria-current="page"
                   {% endif %}
                 >
-                  {{- link.title -}}
+                  {{- display_title -}}
                 </a>
               </li>
+
+              {%- if title_downcase == 'catalog' -%}
+                <li>
+                  <a
+                    href="/collections/all?sort_by=best-selling"
+                    id="MenuItem-best-seller"
+                    class="menu-list__item"
+                  >
+                    Best Seller
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/pages/about"
+                    id="MenuItem-about"
+                    class="menu-list__item"
+                  >
+                    About
+                  </a>
+                </li>
+              {%- endif -%}
             {% endfor %}
           </ul>
         </div>
@@ -84,6 +115,16 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {%- assign title_downcase = link.title | downcase -%}
+        {%- if title_downcase == 'contact' -%}
+          {%- continue -%}
+        {%- endif -%}
+
+        {%- assign display_title = link.title -%}
+        {%- if title_downcase == 'catalog' -%}
+          {%- assign display_title = 'Collections' -%}
+        {%- endif -%}
+
         <li
           role="presentation"
           class="menu-list__list-item"
@@ -106,7 +147,7 @@
             {% endif %}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{{- link.title -}}</span>
+            <span class="menu-list__link-title">{{- display_title -}}</span>
           </a>
           {%- if link.links != blank -%}
             <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
@@ -138,6 +179,43 @@
             </div>
           {%- endif -%}
         </li>
+
+        {%- if title_downcase == 'catalog' -%}
+          <li
+            role="presentation"
+            class="menu-list__list-item"
+            on:focus="/activate"
+            on:blur="/deactivate"
+            on:pointerenter="/activate"
+            on:pointerleave="/deactivate"
+          >
+            <a
+              href="/collections/all?sort_by=best-selling"
+              data-skip-node-update="true"
+              class="menu-list__link"
+              ref="menuitem"
+            >
+              <span class="menu-list__link-title">Best Seller</span>
+            </a>
+          </li>
+          <li
+            role="presentation"
+            class="menu-list__list-item"
+            on:focus="/activate"
+            on:blur="/deactivate"
+            on:pointerenter="/activate"
+            on:pointerleave="/deactivate"
+          >
+            <a
+              href="/pages/about"
+              data-skip-node-update="true"
+              class="menu-list__link"
+              ref="menuitem"
+            >
+              <span class="menu-list__link-title">About</span>
+            </a>
+          </li>
+        {%- endif -%}
       {% endfor %}
       <li
         class="menu-list__list-item"
@@ -240,7 +318,8 @@
     }
 
     & a {
-      color: var(--color-foreground);
+      font-family: 'Cinzel', serif !important;
+      color: #f2f7f7 !important;
     }
   }
 
@@ -277,13 +356,13 @@
   }
 
   .menu-list__link {
-    font-family: var(--menu-top-level-font-family);
+    font-family: 'Cinzel', serif !important;
     font-style: var(--menu-top-level-font-style);
     font-weight: var(--menu-top-level-font-weight);
     font-size: var(--menu-top-level-font-size);
     line-height: var(--menu-top-level-font-line-height);
     text-transform: var(--menu-top-level-font-case);
-    color: var(--menu-top-level-font-color);
+    color: #f2f7f7 !important;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -291,6 +370,7 @@
     cursor: pointer;
     height: 100%;
     margin-block: 0;
+    transition: opacity var(--submenu-animation-speed) var(--ease-out-cubic);
 
     &::after {
       content: '';
@@ -308,7 +388,8 @@
 
     &:hover,
     &:focus {
-      color: var(--menu-top-level-font-color);
+      color: #f2f7f7 !important;
+      opacity: 1 !important;
     }
 
     @media screen and (min-width: 750px) {
@@ -317,7 +398,7 @@
   }
 
   .menu-list__link-title {
-    padding-inline: calc(var(--gap-xl) / 2);
+    padding-inline: calc(var(--gap-xl) * 0.75);
   }
   [slot='overflow'] .menu-list__link-title {
     padding-inline: 0;
@@ -345,7 +426,8 @@
   .menu-list:where(:has(.menu-list__list-item:focus-within)),
   .menu-list:where(:has(.menu-list__list-item:not([aria-hidden='true']) .menu-list__link--active)) {
     .menu-list__link {
-      color: rgb(var(--menu-top-level-font-color-rgb) / var(--opacity-subdued-text));
+      color: #f2f7f7 !important;
+      opacity: 0.65;
     }
   }
 
@@ -353,7 +435,8 @@
   .menu-list:not(:has(.menu-list__list-item:hover)) .menu-list__link--active,
   .menu-list .menu-list__list-item:where(:hover, :focus-within) .menu-list__link,
   .menu-list .menu-list__list-item[slot='overflow'] .menu-list__link[aria-expanded='true'] {
-    color: var(--menu-top-level-font-color);
+    color: #f2f7f7 !important;
+    opacity: 1 !important;
   }
 
   .overflow-menu::part(list) {
