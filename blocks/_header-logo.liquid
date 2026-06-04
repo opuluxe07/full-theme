@@ -76,14 +76,20 @@
       class="header-logo__image-container header-logo__image-container--inverse"
       data-testid="header-logo-inverse"
     >
-      {% render 'image',
-        image: inverse_logo,
-        class: 'header-logo__image',
-        height: settings.logo_height,
-        alt_text_fallback: alt_text_fallback,
-        text_fallback: shop.name,
-        style: inverse_logo_style
-      %}
+      {%- if settings.logo_inverse != blank or settings.logo != blank -%}
+        {% render 'image',
+          image: inverse_logo,
+          class: 'header-logo__image',
+          height: settings.logo_height,
+          alt_text_fallback: alt_text_fallback,
+          style: inverse_logo_style
+        %}
+      {%- else -%}
+        <span class="elegant-luxury-logo">
+          <span class="elegant-luxury-logo__main">{{ shop.name }}</span>
+          <span class="elegant-luxury-logo__sub">HAUTE COUTURE</span>
+        </span>
+      {%- endif -%}
     </span>
   {% endif %}
 </a>
