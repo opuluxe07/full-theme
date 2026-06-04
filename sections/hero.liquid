@@ -19,7 +19,7 @@
     assign media_1 = 'image'
     assign media_count = media_count | plus: 1
   endif
-  if section.settings.video_1 != blank and section.settings.media_type_1 == 'video'
+  if section.settings.media_type_1 == 'video'
     assign media_1 = 'video'
     assign media_count = media_count | plus: 1
   endif
@@ -39,7 +39,7 @@
       assign media_1_mobile = 'image'
       assign media_count_mobile = media_count_mobile | plus: 1
     endif
-    if section.settings.video_1_mobile != blank and section.settings.media_type_1_mobile == 'video'
+    if section.settings.media_type_1_mobile == 'video'
       assign media_1_mobile = 'video'
       assign media_count_mobile = media_count_mobile | plus: 1
     endif
@@ -166,16 +166,30 @@
 
   {%- if media_1 == 'video' -%}
     <div class="{{ media_wrapper_desktop_class }}">
-      <video
-        autoplay
-        loop
-        muted
-        playsinline
-        class="hero__media"
-        data-testid="hero-desktop-video-1"
-      >
-        <source src="{{ 'Product_showcase_video_electronics_202606031955.mp4' | asset_url }}" type="video/mp4">
-      </video>
+      {%- if section.settings.video_1 != blank -%}
+        {{
+          section.settings.video_1
+          | video_tag:
+            poster: nil,
+            autoplay: true,
+            loop: true,
+            controls: false,
+            muted: true,
+            class: 'hero__media',
+            data-testid: 'hero-desktop-video-1'
+        }}
+      {%- else -%}
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="hero__media"
+          data-testid="hero-desktop-video-1"
+        >
+          <source src="{{ 'hero-background.mp4' | asset_url }}" type="video/mp4">
+        </video>
+      {%- endif -%}
     </div>
   {%- endif -%}
 
@@ -201,16 +215,30 @@
 
     {%- if media_1_mobile == 'video' -%}
       <div class="{{ media_wrapper_mobile_class }}">
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="hero__media"
-          data-testid="hero-mobile-video-1"
-        >
-          <source src="{{ 'Product_showcase_video_electronics_202606031955.mp4' | asset_url }}" type="video/mp4">
-        </video>
+        {%- if section.settings.video_1_mobile != blank -%}
+          {{
+            section.settings.video_1_mobile
+            | video_tag:
+              poster: nil,
+              autoplay: true,
+              loop: true,
+              controls: false,
+              muted: true,
+              class: 'hero__media',
+              data-testid: 'hero-mobile-video-1'
+          }}
+        {%- else -%}
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            class="hero__media"
+            data-testid="hero-mobile-video-1"
+          >
+            <source src="{{ 'hero-background.mp4' | asset_url }}" type="video/mp4">
+          </video>
+        {%- endif -%}
       </div>
     {%- endif -%}
   {%- endif -%}
