@@ -1,6 +1,7 @@
 
 
 {% assign collection = block.settings.collection %}
+{% assign card_index = closest.index %}
 
 {% capture card_image %}
   {% content_for 'block',
@@ -11,7 +12,7 @@
 {% endcapture %}
 
 {% capture children %}
-  {% content_for 'blocks' %}
+  {% content_for 'blocks', closest.collection: collection, closest.index: card_index %}
 {% endcapture %}
 
 {% render 'collection-card',
@@ -19,7 +20,8 @@
   children: children,
   block: block,
   collection: collection,
-  section: section
+  section: section,
+  card_index: card_index
 %}
 
 {% schema %}

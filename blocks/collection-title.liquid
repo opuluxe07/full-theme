@@ -2,42 +2,85 @@
 
 {% liquid
   assign title_text = ''
+  assign card_index = closest.index
+
   if closest.collection == blank
-    capture placeholder_text
-      cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
-    endcapture
-    case placeholder_text
-      when 'CHRONO LUXURY'
-        assign title_text = 'gadgets & techs'
-      when 'TECHWEAR APPAREL'
-        assign title_text = 'fitness & outdoor gear'
-      when 'NEON ACCESSORIES'
-        assign title_text = 'men accessories'
-      when 'FUTURE COUTURE'
-        assign title_text = 'women accessories'
-      else
-        assign title_text = placeholder_text
-    endcase
+    if card_index != blank
+      case card_index
+        when 1
+          assign title_text = 'fitness & outdoor gear'
+        when 2
+          assign title_text = 'men accessories'
+        when 3
+          assign title_text = 'women accessories'
+        when 4
+          assign title_text = 'gadgets & techs'
+        else
+          assign title_text = 'fitness & outdoor gear'
+      endcase
+    else
+      capture placeholder_text
+        cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
+      endcapture
+      case placeholder_text
+        when 'CHRONO LUXURY'
+          assign title_text = 'fitness & outdoor gear'
+        when 'TECHWEAR APPAREL'
+          assign title_text = 'men accessories'
+        when 'NEON ACCESSORIES'
+          assign title_text = 'women accessories'
+        when 'FUTURE COUTURE'
+          assign title_text = 'gadgets & techs'
+        else
+          assign title_text = placeholder_text
+      endcase
+    endif
   else
     assign handle = closest.collection.handle
     case handle
       when 'chrono-luxury'
-        assign title_text = 'gadgets & techs'
-      when 'techwear-apparel'
         assign title_text = 'fitness & outdoor gear'
-      when 'neon-accessories'
+      when 'techwear-apparel'
         assign title_text = 'men accessories'
-      when 'future-couture'
+      when 'neon-accessories'
         assign title_text = 'women accessories'
+      when 'future-couture'
+        assign title_text = 'gadgets & techs'
       else
-        assign title_text = closest.collection.title
+        if card_index == 1
+          assign title_text = 'fitness & outdoor gear'
+        elsif card_index == 2
+          assign title_text = 'men accessories'
+        elsif card_index == 3
+          assign title_text = 'women accessories'
+        elsif card_index == 4
+          assign title_text = 'gadgets & techs'
+        else
+          assign title_text = closest.collection.title
+        endif
     endcase
   endif
 
   assign collection_title = '<p>' | append: title_text | append: '</p>'
 %}
 
-{% render 'text', fallback_text: collection_title, block: block %}
+<style>
+  .collection-title-text {
+    font-family: 'Cinzel', serif !important;
+  }
+  .collection-title-text p,
+  .collection-title-text span,
+  .collection-title-text a {
+    font-family: 'Cinzel', serif !important;
+    color: #121212 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
+    font-size: 0.85rem !important;
+  }
+</style>
+
+{% render 'text', fallback_text: collection_title, block: block, class: 'collection-title-text' %}
 
 {% schema %}
 {

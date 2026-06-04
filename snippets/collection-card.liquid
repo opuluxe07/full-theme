@@ -66,34 +66,59 @@
     {% liquid
       assign display_title = ''
       if onboarding
-        capture placeholder_text
-          cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
-        endcapture
-        case placeholder_text
-          when 'CHRONO LUXURY'
-            assign display_title = 'gadgets & techs'
-          when 'TECHWEAR APPAREL'
-            assign display_title = 'fitness & outdoor gear'
-          when 'NEON ACCESSORIES'
-            assign display_title = 'men accessories'
-          when 'FUTURE COUTURE'
-            assign display_title = 'women accessories'
-          else
-            assign display_title = placeholder_text
-        endcase
+        if card_index != blank
+          case card_index
+            when 1
+              assign display_title = 'fitness & outdoor gear'
+            when 2
+              assign display_title = 'men accessories'
+            when 3
+              assign display_title = 'women accessories'
+            when 4
+              assign display_title = 'gadgets & techs'
+            else
+              assign display_title = 'fitness & outdoor gear'
+          endcase
+        else
+          capture placeholder_text
+            cycle 'placeholders': 'CHRONO LUXURY', 'TECHWEAR APPAREL', 'NEON ACCESSORIES', 'FUTURE COUTURE'
+          endcapture
+          case placeholder_text
+            when 'CHRONO LUXURY'
+              assign display_title = 'fitness & outdoor gear'
+            when 'TECHWEAR APPAREL'
+              assign display_title = 'men accessories'
+            when 'NEON ACCESSORIES'
+              assign display_title = 'women accessories'
+            when 'FUTURE COUTURE'
+              assign display_title = 'gadgets & techs'
+            else
+              assign display_title = placeholder_text
+          endcase
+        endif
       else
         assign handle = collection.handle
         case handle
           when 'chrono-luxury'
-            assign display_title = 'gadgets & techs'
-          when 'techwear-apparel'
             assign display_title = 'fitness & outdoor gear'
-          when 'neon-accessories'
+          when 'techwear-apparel'
             assign display_title = 'men accessories'
-          when 'future-couture'
+          when 'neon-accessories'
             assign display_title = 'women accessories'
+          when 'future-couture'
+            assign display_title = 'gadgets & techs'
           else
-            assign display_title = collection.title
+            if card_index == 1
+              assign display_title = 'fitness & outdoor gear'
+            elsif card_index == 2
+              assign display_title = 'men accessories'
+            elsif card_index == 3
+              assign display_title = 'women accessories'
+            elsif card_index == 4
+              assign display_title = 'gadgets & techs'
+            else
+              assign display_title = collection.title
+            endif
         endcase
       endif
     %}
